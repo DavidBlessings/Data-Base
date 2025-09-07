@@ -113,6 +113,215 @@
             font-style: italic;
         }
 
+        /* User Table Styling */
+.table-container {
+    overflow-x: auto; /* Scroll if table is wider than container */
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+#userTable {
+    font-size: 13px; /* Reduced font size */
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px; /* Keep structure readable */
+}
+
+/* Header styling */
+#userTable thead {
+    background-color: #f4f6f8;
+}
+
+#userTable th {
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Data cell styling */
+#userTable td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Row striping for readability */
+#userTable tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Row hover effect */
+#userTable tbody tr:hover {
+    background-color: #eaf3ff;
+}
+
+/* Action button tweaks inside table */
+#userTable td button {
+    padding: 4px 8px;
+    font-size: 12px;
+    margin: 0 2px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#userTable td button.edit {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+#userTable td button.delete {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+#userTable td button:hover {
+    opacity: 0.85;
+}
+
+/* Incident Table Container */
+.table-container {
+    overflow-x: auto;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+}
+
+/* Incident Table Styling */
+#incidentTable {
+    font-size: 13px; /* Reduced font size */
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+/* Table Header */
+#incidentTable thead {
+    background-color: #f4f6f8;
+}
+
+#incidentTable th {
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Table Body Cells */
+#incidentTable td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Alternate Row Colors */
+#incidentTable tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Highlight Row on Hover */
+#incidentTable tbody tr:hover {
+    background-color: #eaf3ff;
+}
+
+/* Action Buttons (Edit/Delete) */
+#incidentTable td button {
+    padding: 4px 8px;
+    font-size: 12px;
+    margin: 0 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+}
+
+#incidentTable td button.edit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#incidentTable td button.delete {
+    background-color: #f44336;
+    color: white;
+}
+
+#incidentTable td button:hover {
+    opacity: 0.85;
+}
+  /* Basic Modal Styling */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
+
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%; /* Could be more or less, depending on screen size */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    border-radius: 5px;
+  }
+
+  /* Add Animation */
+  @keyframes animatetop {
+    from {
+      top: -300px;
+      opacity: 0
+    }
+
+    to {
+      top: 0;
+      opacity: 1
+    }
+  }
+
+  /* The Close Button */
+  .close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close-button:hover,
+  .close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Button styling inside modal */
+  .modal-content button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    border-radius: 5px;
+  }
+
+  .modal-content button:hover {
+    opacity: 0.8;
+  }
+
+
+
+
 </style>
 </head>
 <body>
@@ -235,9 +444,9 @@ button.primary { margin-right: 10px; }
     </form>
 
     <h3>Current Incidents</h3>
-    <div class="table-container">
-        <table id="incidentTable">
-            <thead>
+   <div class="table-container">
+    <table id="incidentTable">
+        <thead>
             <tr>
                 <th>Title</th>
                 <th>Description</th>
@@ -245,15 +454,15 @@ button.primary { margin-right: 10px; }
                 <th>Date</th>
                 <th>Time</th>
                 <th>Reporter</th>
-                <th>Attachment</th>
                 <th>Actions</th>
             </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
+        </thead>
+        <tbody>
+            <!-- Incident rows will be rendered dynamically -->
+        </tbody>
+    </table>
 </div>
-
+</div>
 <!-- System Reports -->
     <div id="systemReports" class="section" style="display:none;">
         <h1>System Reports</h1>
@@ -265,6 +474,18 @@ button.primary { margin-right: 10px; }
         </div>
     </div>
 </div>
+
+<!-- Modal Structure -->
+<div id="exportModal" class="modal">
+  <div class="modal-content">
+    <span class="close-button" onclick="closeModal()">&times;</span>
+    <h2>Export Options</h2>
+    <p>Choose your export method:</p>
+    <button onclick="exportTableToCSV()">Export Visible Data</button>
+    <button onclick="exportAllIncidentsToCSV()">Export All Data</button>
+  </div>
+</div>
+
 
 
 <script>
@@ -467,46 +688,95 @@ function renderIncidents() {
     });
 }
 
-  // Function to download incidents as CSV
-    function downloadIncidentsCSV() {
-        // Helper function to convert users to CSV format (already defined in previous example)
-        function convertIncidentsToCSV(incidents) {
-            const header = ["Title", "Description", "Location", "Date", "Time", "Reporter"];
-            const csvRows = incidents.map(incident => {
-                const values = [
-                    incident.title,
-                    incident.description,
-                    incident.location,
-                    incident.date,
-                    incident.time,
-                    incident.reporter
-                ];
-                return values.map(value => `"${value.replace(/"/g, '""')}"`).join(",");
-            });
-            csvRows.unshift(header.join(",")); // Add header row
-            return csvRows.join("\r\n");
-        }
+// JavaScript Functions for Modal and Exporting
+function openModal() {
+  document.getElementById('exportModal').style.display = 'block';
+}
 
-        const csvData = convertIncidentsToCSV(incidents); // Generate CSV data from the 'users' array
+function closeModal() {
+  document.getElementById('exportModal').style.display = 'none';
+}
 
-        // Create a Blob from the CSV data
-        const blob = new Blob([csvData], { type: 'text/csv' });
+// Function to export the HTML table to CSV
+function exportTableToCSV() {
+  let csv = [];
+  let rows = document.querySelectorAll("#incidentTable tr");
 
-        // Create a link element
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'incident_list.csv'; // Set the filename
+  for (let i = 0; i < rows.length; i++) {
+    let row = [],
+      cols = rows[i].querySelectorAll("td, th");
 
-        // Programmatically trigger the download
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
-        // Clean up the URL object
-        window.URL.revokeObjectURL(url);
+    for (let j = 0; j < cols.length; j++) {
+      // Clean the text by removing any commas and double quotes that might mess up the CSV
+      let text = cols[j].innerText.replace(/,/g, " ").replace(/"/g, '""');
+      row.push('"' + text + '"'); // Quote the value
     }
 
+    csv.push(row.join(","));
+  }
+
+  // Download the CSV file
+  downloadCSV(csv.join("\n"), "incident_table.csv");
+}
+
+// Function to export all incidents data to CSV
+function exportAllIncidentsToCSV() {
+  // Implement the function to export all incidents to CSV
+  // This function will use the `incidents` array to generate the CSV
+  const header = ["Title", "Description", "Location", "Date", "Time", "Reporter"];
+
+  // Convert incident data to CSV format
+  const csvRows = incidents.map(incident => {
+    const values = [
+      incident.title,
+      incident.description,
+      incident.location,
+      incident.date,
+      incident.time,
+      incident.reporter
+    ];
+    return values.map(value => `"${value}"`).join(","); // Wrap values in quotes
+  });
+
+  // Add header to CSV rows
+  csvRows.unshift(header.join(","));
+
+  // Join all rows to create the CSV string
+  const csvString = csvRows.join("\r\n");
+  downloadCSV(csvString, "all_incidents.csv");
+}
+
+// Function to trigger the download
+function downloadCSV(csv, filename) {
+  let csvFile;
+  let downloadLink;
+
+  // CSV file
+  csvFile = new Blob([csv], {
+    type: "text/csv"
+  });
+
+  // Download link
+  downloadLink = document.createElement("a");
+
+  // File name
+  downloadLink.download = filename;
+
+  // Create a link to the file
+  downloadLink.href = window.URL.createObjectURL(csvFile);
+
+  // Hide download link
+  downloadLink.style.display = "none";
+
+  // Add the link to DOM
+  document.body.appendChild(downloadLink);
+
+  // Click download link
+  downloadLink.click();
+
+  // Remove the link from DOM
+  document.body.removeChild(downloadLink);
+}
 
 
     // Dashboard stats
