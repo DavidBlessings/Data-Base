@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>sagittarius Security Services</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        background: blue;
+        color: gold;
+        display: flex;
+        flex-direction: column;
+        padding-top: 20px;
+    }
+    .sidebar h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+    .sidebar button {
+        padding: 15px;
+        border: none;
+        background: none;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .sidebar button:hover {
+        background: blue;
+    }
+
+     /* Logo Styling (Example for Sidebar) */
+        .sidebar .logo {
+            width: 100px;
+            margin-bottom: 16px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    /* Main content */
+    .main {
+        flex: 1;
+        padding: 50px;
+        overflow-y: auto;
+    }
+    h1 {
+        margin-top: 0;
+    }
+    .card {
+        background: whitesmoke;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        margin-bottom: 20px;
+        font-size: large;
+        font-weight: bold;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+    th, td {
+        padding: 8px;
+        border: 1px solid white;
+    }
+    #map {
+        width: 100%;
+        height: 300px;
+        background: gold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        color: #555;
+    }
+    input, select, textarea {
+        padding: 8px;
+        width: 100%;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    button.primary {
+        background: #007BFF;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+    button.primary:hover {
+        background: #0056b3;
+    }
+     #currentTime {
+            font-size: 18px;
+            color: blue;
+            text-align: right; /* Adjust alignment as needed */
+            margin-top: -20px; /* Adjust margin as needed */
+            font-weight: bold;
+            font-style: italic;
+        }
+
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+     <img src="https://drive.google.com/file/d/1K4b6hiMIox2_y-Dof3Ezm4pd7uWNTg3r/view?usp=sharing" alt="Logo" class="logo">
+    <h2>Sagittarius Security Services</h2>
+    <button onclick="showSection('dashboard')">Dashboard</button>
+    <button onclick="showSection('incidentReporting')">Incident Reporting</button>
+    <button onclick="showSection('userManagement')">User Management</button>
+    <button onclick="showSection('systemReports')">System Reports</button>
+   
+</div>
+
+<div class="main">
+    <!-- Dashboard -->
+      <div id="currentTime"></div> <!-- Time Display -->
+
+    <div id="dashboard" class="section">
+        <h1>Dashboard</h1>
+
+        <div class="card">
+            <h3>Quick Stats</h3>
+            <p>Total Guards: <span id="totalGuards">0</span></p>
+            <p>Open Incidents: <span id="openIncidents">0</span></p>
+            <p>Total Users: <span id="totalUsers">0</span></p>
+        </div>
+    </div>
+
+
+   <!-- Incident Reporting -->
+<div id="incidentReporting" class="section" style="display:none;">
+    <h1>Incident Reporting</h1>
+    <form id="incidentForm">
+        <input type="text" id="incidentTitle" placeholder="Incident Title" required/>
+        <textarea id="incidentDescription" placeholder="Incident Description" required></textarea>
+        <input type="text" id="incidentLocation" placeholder="Incident Location" required/>
+        <input type="date" id="incidentDate" required/>
+        <input type="time" id="incidentTime" required/>
+        <input type="text" id="incidentReporter" placeholder="Reporter Name" required/>
+        <input type="file" id="incidentImage" accept="image/*" />
+        <button type="submit" class="primary">Report Incident</button>
+    </form>
+    <h3>Reported Incidents</h3>
+    <table id="incidentTable">
+        <thead>
+            <tr><th>Title</th><th>Description</th><th>Location</th><th>Date</th><th>Time</th><th>Reporter</th><th>Attachment</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+  <!-- User Management -->
+<div id="userManagement" class="section" style="display:none;">
+    <h1>User Management</h1>
+    <form id="userForm">
+        <input type="text" id="employeeId" placeholder="Employee ID" required/>
+        <input type="text" id="firstName" placeholder="First Name" required/>
+        <input type="text" id="lastName" placeholder="Last Name" required/>
+        <input type="tel" id="phoneNumber" placeholder="Phone Number" required/>
+        <select id="department" required>
+            <option value="">Select Department</option>
+            <option value="HR">HR</option>
+            <option value="Operation">Operation</option>
+            <option value="Finance">Finance</option>
+            <option value="IT">IT</option>
+            <option value="Marketing">Marketing</option>
+        </select>
+        <input type="text" id="location" placeholder="Location" required/>
+        <select id="role">
+            <option value="Admin">Admin</option>
+            <option value="Guard">Guard</option>
+            <option value="Supervisor">Supervisor</option>
+            <option value="Head of Operations">Head of Operations</option>
+            <option value="HR Manager">HR Manager</option>
+            <option value="Accountant">Accountant</option>
+            <option value="IT Manager">IT Manager</option>
+        </select>
+        <button type="submit" class="primary" id="saveUserBtn">Add User</button>
+    </form>
+
+    <!-- Add this button -->
+    <button onclick="downloadUsersCSV()" class="primary">Download Users></button>
+    <style>
+    button { margin-top: 10px; } 
+button.primary { margin-right: 10px; }   
+
+    </style>
+
+    <h3>Current Users</h3>
+    <div class="table-container">
+        <table id="userTable">
+            <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Department</th>
+                <th>Location</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+ <!-- Incident Reporting -->
+<div id="incidentReporting" class="section" style="display:none;">
+    <h1>Incident Reporting</h1>
+    <form id="incidentForm">
+        <!-- ... (Your Incident Form Inputs) ... -->
+        <button type="submit" class="primary">Report Incident</button>
+        <!-- Add this button -->
+           <button type="button" onclick="downloadIncidentsCSV()" class="primary">Download Incident Report</button>
+
+    </form>
+
+    <h3>Current Incidents</h3>
+    <div class="table-container">
+        <table id="incidentTable">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Reporter</th>
+                <th>Attachment</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- System Reports -->
+    <div id="systemReports" class="section" style="display:none;">
+        <h1>System Reports</h1>
+        <div class="card">
+            <h3>Summary</h3>
+            <p>Generate system summary reports from the stored data.</p>
+            <button class="primary" onclick="generateReport()">Generate Report</button>
+            <div id="reportOutput" style="margin-top:15px;"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+      // Function to update the current time
+    function updateCurrentTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString(); // Format the time
+        document.getElementById('currentTime').textContent = `Current Time: ${timeString}`;
+    }
+
+    // Update the time every second
+    setInterval(updateCurrentTime, 1000);
+
+    // Initial update
+    updateCurrentTime();
+
+    // Section navigation
+
+    const sections = document.querySelectorAll('.section');
+    function showSection(id) {
+        sections.forEach(sec => sec.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+        updateDashboardStats();
+    }
+
+    // Data storage simulation
+    let incidents = JSON.parse(localStorage.getItem('incidents')) || [];
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+let editIndex = null; // Track editing mode
+
+// User Management
+const userForm = document.getElementById('userForm');
+const saveUserBtn = document.getElementById('saveUserBtn');
+
+userForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const newUser = {
+        employeeId: document.getElementById('employeeId').value.trim(),
+        firstName: document.getElementById('firstName').value.trim(),
+        lastName: document.getElementById('lastName').value.trim(),
+         location: document.getElementById('location').value.trim(),
+        phoneNumber: document.getElementById('phoneNumber').value.trim(),
+        department: document.getElementById('department').value.trim(),
+        role: document.getElementById('role').value
+    };
+
+    if (editIndex !== null) {
+        // Save changes to existing user
+        users[editIndex] = newUser;
+        editIndex = null;
+        saveUserBtn.textContent = "Add User";
+    } else {
+        // Add new user
+        users.push(newUser);
+    }
+
+    localStorage.setItem('users', JSON.stringify(users));
+    userForm.reset();
+    renderUsers();
+    updateDashboardStats();
+});
+
+function renderUsers() {
+    const tbody = document.querySelector('#userTable tbody');
+    tbody.innerHTML = '';
+    users.forEach((u, index) => {
+        const row = `
+            <tr>
+                <td>${u.employeeId}</td>
+                <td>${u.firstName}</td>
+                <td>${u.lastName}</td>
+                <td>${u.location}</td>
+                <td>${u.phoneNumber}</td>
+                <td>${u.department}</td>
+                <td>${u.role}</td>
+                <td>
+                    <button onclick="editUser(${index})">Edit</button>
+                    <button onclick="deleteUser(${index})" style="color:red;">Delete</button>
+                </td>
+            </tr>
+        `;
+        tbody.innerHTML += row;
+    });
+}
+
+function editUser(index) {
+    const u = users[index];
+    document.getElementById('employeeId').value = u.employeeId;
+    document.getElementById('firstName').value = u.firstName;
+    document.getElementById('lastName').value = u.lastName;
+     document.getElementById('location').value = u.location;
+    document.getElementById('phoneNumber').value = u.phoneNumber;
+    document.getElementById('department').value = u.department;
+    document.getElementById('role').value = u.role;
+
+    editIndex = index;
+    saveUserBtn.textContent = "Save Changes";
+}
+
+function deleteUser(index) {
+    if (confirm("Are you sure you want to delete this user?")) {
+        users.splice(index, 1);
+        localStorage.setItem('users', JSON.stringify(users));
+        renderUsers();
+        updateDashboardStats();
+    }
+}
+
+function downloadUsersCSV() {
+    // Helper function to convert users to CSV format (already defined in previous example)
+    function convertUsersToCSV(users) {
+        const header = ["Employee ID", "First Name", "Last Name", "Phone Number", "Department", "Location", "Role"];
+        const csvRows = users.map(user => {
+            const values = [
+                user.employeeId,
+                user.firstName,
+                user.lastName,
+                user.phoneNumber,
+                user.department,
+                user.location,
+                user.role
+            ];
+            return values.map(value => `"${value.replace(/"/g, '""')}"`).join(",");
+        });
+        csvRows.unshift(header.join(",")); // Add header row
+        return csvRows.join("\r\n");
+    }
+
+    const csvData = convertUsersToCSV(users); // Generate CSV data from the 'users' array
+
+    // Create a Blob from the CSV data
+    const blob = new Blob([csvData], { type: 'text/csv' });
+
+    // Create a link element
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'user_list.csv'; // Set the filename
+
+    // Programmatically trigger the download
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    // Clean up the URL object
+    window.URL.revokeObjectURL(url);
+}
+
+
+// Incident Reporting
+const incidentForm = document.getElementById('incidentForm');
+
+incidentForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const title = document.getElementById('incidentTitle').value;
+    const description = document.getElementById('incidentDescription').value;
+    const location = document.getElementById('incidentLocation').value;
+    const date = document.getElementById('incidentDate').value;
+    const time = document.getElementById('incidentTime').value;
+    const reporter = document.getElementById('incidentReporter').value;
+    const imageFile = document.getElementById('incidentImage').files[0];
+
+    const incident = {
+        title: title,
+        description: description,
+        location: location,
+        date: date,
+        time: time,
+        reporter: reporter,
+        attachment: imageFile ? URL.createObjectURL(imageFile) : null
+    };
+
+    incidents.push(incident);
+    localStorage.setItem('incidents', JSON.stringify(incidents));
+    incidentForm.reset();
+    renderIncidents();
+    updateDashboardStats();
+});
+
+function renderIncidents() {
+    const tbody = document.querySelector('#incidentTable tbody');
+    tbody.innerHTML = '';
+
+    incidents.forEach(i => {
+        const attachmentDisplay = i.attachment ? `<img src="${i.attachment}" alt="Attachment" style="max-width: 100px; max-height: 100px;">` : 'No Attachment';
+        const row = `<tr>
+                        <td>${i.title}</td>
+                        <td>${i.description}</td>
+                        <td>${i.location}</td>
+                        <td>${i.date}</td>
+                        <td>${i.time}</td>
+                        <td>${i.reporter}</td>
+                        <td>${attachmentDisplay}</td>
+                    </tr>`;
+        tbody.innerHTML += row;
+    });
+}
+
+  // Function to download incidents as CSV
+    function downloadIncidentsCSV() {
+        // Helper function to convert users to CSV format (already defined in previous example)
+        function convertIncidentsToCSV(incidents) {
+            const header = ["Title", "Description", "Location", "Date", "Time", "Reporter"];
+            const csvRows = incidents.map(incident => {
+                const values = [
+                    incident.title,
+                    incident.description,
+                    incident.location,
+                    incident.date,
+                    incident.time,
+                    incident.reporter
+                ];
+                return values.map(value => `"${value.replace(/"/g, '""')}"`).join(",");
+            });
+            csvRows.unshift(header.join(",")); // Add header row
+            return csvRows.join("\r\n");
+        }
+
+        const csvData = convertIncidentsToCSV(incidents); // Generate CSV data from the 'users' array
+
+        // Create a Blob from the CSV data
+        const blob = new Blob([csvData], { type: 'text/csv' });
+
+        // Create a link element
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'incident_list.csv'; // Set the filename
+
+        // Programmatically trigger the download
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        // Clean up the URL object
+        window.URL.revokeObjectURL(url);
+    }
+
+
+
+    // Dashboard stats
+    function updateDashboardStats() {
+        document.getElementById('totalGuards').innerText = users.filter(u => u.role === 'Guard').length;
+         document.getElementById('totalUsers').textContent = users.length;
+    document.getElementById('openIncidents').innerText = incidents.length;
+        document.getElementById('systemReportTotalUsers').textContent = users.length;
+
+}
+// System report
+    function generateReport() {
+        const reportOutput = document.getElementById('reportOutput');
+        reportOutput.innerHTML = `
+            <p><strong>Total Users:</strong> ${users.length}</p>
+            <p><strong>Total Guards:</strong> ${users.filter(u => u.role === 'Guard').length}</p>
+            <p><strong>Total Incidents:</strong> ${incidents.length}</p>
+        `;
+    }
+function updateSystemReport() {
+    const userCSV = exportUsersToCSVData();  // Get user table data as CSV
+    const incidentCSV = exportIncidentsToCSVData(); // Get incident table data as CSV
+    const reportText = `Total Users: ${users.length}\n\nUsers Table:\n${userCSV}\n\nIncidents Table:\n${incidentCSV}`;
+    document.getElementById('incidentReportText').value = reportText;
+    document.getElementById('systemReportTotalUsers').textContent = users.length;
+}
+function exportIncidentsToCSV() {
+        // CSV Header
+        const header = ["Title", "Description", "Location", "Date", "Time", "Reporter", "Attachment"];
+
+        // Convert incident data to CSV format
+        const csvRows = incidents.map(incident => {
+            const values = [
+                incident.title,
+                incident.description,
+                incident.location,
+                incident.date,
+                incident.time,
+                incident.reporter,
+                incident.attachment ? incident.attachment : ''
+            ];
+            return values.map(value => `"${value}"`).join(","); // Wrap values in quotes
+        });
+
+        // Add header to CSV rows
+        csvRows.unshift(header.join(","));
+
+        // Join all rows to create the CSV string
+        const csvString = csvRows.join("\r\n");
+
+        // Create a download link
+        const blob = new Blob([csvString], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+
+        // Create a link element and trigger the download
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", "incident_report.csv");
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+} 
+
+   
+    // Initialize
+    renderIncidents();
+    renderUsers();
+    updateDashboardStats();
+    simulateGuardTracking();
+</script>
+</body>
+</html>
